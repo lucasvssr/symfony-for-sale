@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Confirmation de votre email</h1>
+    {% if not form.vars.valid %}
+        <div class="alert alert-danger">
+            {{ form_errors(form) }}
+        </div>
+    {% endif %}
+
+    <p>
+        Un email de confirmation vous a été envoyé.
+        Veuillez cliquer sur le lien contenu dans cet email pour confirmer votre adresse email ou renvoyer un email de confirmation.
+    </p>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block title %}
+
+{% endblock %}
+

@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <div class="bg-subtle">
+        {% for advertisement in advertisements %}
+            {{ include('_adverstisement.html.twig', {'advertisement': advertisement}) }}
+        {% else %}
+            <p>Pas d'annonce</p>
+        {% endfor %}
+    </div>
+    <div class="d-flex align-items-center justify-content-center">
+    {{ knp_pagination_render(advertisements) }}
+    </div>
+{% endblock %}

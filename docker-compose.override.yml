@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+###> doctrine/doctrine-bundle ###
+  database:
+    ports:
+      - "5432:5432"
+###< doctrine/doctrine-bundle ###
+
+###> symfony/mailer ###
+  mailer:
+    image: schickling/mailcatcher
+    ports:
+      - "1025:1025"
+      - "1080:1080"
+###< symfony/mailer ###
+  adminer:
+    image: michalhosna/adminer
+    ports: ["8080:8080"]
+    environment:
+        ADMINER_AUTOLOGIN: 1
+        ADMINER_DB: app
+        ADMINER_DRIVER: pgsql
+        ADMINER_SERVER: database
+        ADMINER_USERNAME: ${POSTGRES_USER:-app}
+        ADMINER_PASSWORD: ${POSTGRES_PASSWORD:-!ChangeMe!}
+        ADMINER_DATABASE: ${POSTGRES_DB:-app}

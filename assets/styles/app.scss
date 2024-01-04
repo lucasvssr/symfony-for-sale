@@ -1,0 +1,77 @@
+@import "~bootstrap/scss/functions";
+
+$light: #d7c3c7;
+$dark: #030401;
+$primary: #6f3716;
+$secondary: #844421;
+$info: #e4a587;
+$accent1: #67bebd;
+$accent2: #1b8876;
+$accent3: #5ab4af;
+$success: #53a812;
+$warning: #ffc15a;
+$danger: #f30860;
+
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/variables-dark";
+
+@import "~bootstrap/scss/maps";
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/utilities";
+
+@import "~bootstrap/scss/root";
+@import "~bootstrap/scss/reboot";
+
+@import "~bootstrap/scss/accordion";
+@import "~bootstrap/scss/alert";
+@import "~bootstrap/scss/badge";
+@import "~bootstrap/scss/breadcrumb";
+@import "~bootstrap/scss/button-group";
+@import "~bootstrap/scss/buttons";
+@import "~bootstrap/scss/card";
+@import "~bootstrap/scss/carousel";
+@import "~bootstrap/scss/close";
+@import "~bootstrap/scss/containers";
+@import "~bootstrap/scss/dropdown";
+@import "~bootstrap/scss/forms";
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/grid";
+@import "~bootstrap/scss/helpers";
+@import "~bootstrap/scss/images";
+@import "~bootstrap/scss/list-group";
+@import "~bootstrap/scss/maps";
+@import "~bootstrap/scss/modal";
+@import "~bootstrap/scss/nav";
+@import "~bootstrap/scss/navbar";
+@import "~bootstrap/scss/offcanvas";
+@import "~bootstrap/scss/pagination";
+@import "~bootstrap/scss/popover";
+@import "~bootstrap/scss/progress";
+@import "~bootstrap/scss/spinners";
+@import "~bootstrap/scss/tables";
+@import "~bootstrap/scss/toasts";
+@import "~bootstrap/scss/tooltip";
+@import "~bootstrap/scss/transitions";
+@import "~bootstrap/scss/type";
+@import "~bootstrap/scss/utilities/api";
+
+@import "~bootstrap-icons";
+
+div:nth-child(even of .bg-subtle) {
+    background-color: $secondary-bg-subtle;
+}
+
+@include color-mode(dark) {
+    div:nth-child(even of .bg-subtle) {
+        background-color: $secondary-bg-subtle-dark;
+    }
+}
+
+.navbar .dropdown-menu .active .bi {
+    display: block!important;
+}
+
+.owner-badge {
+    background-color: $accent1;
+    color: $dark;
+}

@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Annonces Préférées{% endblock %}
+
+{% block body %}
+    <div class="bg-subtle">
+        {% for advertisement in advertisements %}
+            {{ include('_adverstisement.html.twig', {'advertisement': advertisement}) }}
+        {% else %}
+            <p>Aucune annonce préférée pour le moment.</p>
+        {% endfor %}
+    </div>
+    <div class="d-flex align-items-center justify-content-center">
+        {{ knp_pagination_render(advertisements) }}
+    </div>
+{% endblock %}

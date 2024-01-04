@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html data-bs-theme="dark">
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}{{ search | default('Advertisements') }}{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+    </head>
+    <body class="container">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary mb-5">
+            <div class="container-fluid align-items-start">
+                <a class="navbar-brand text-accent1" href="/">
+                    <i class="bi-globe-europe-africa"></i>
+                    Navbar
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/">Accueil</a>
+                        </li>
+
+                        {% if is_granted('ROLE_USER') %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="/logout">Déconnexion</a>
+                            </li>
+                            <li class="nav-item"><a class="nav-link" href="{{ path('app_user_advertisements', {'user': app.user.id}) }}">Mes Annonces</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ path('app_advertisement_liked') }}">Annonces préférées</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ path('app_advertisement_new') }}">Créer une annonce</a></li>
+                        {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/login">Connexion</a>
+                        </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/register">Inscription</a>
+                            </li>
+                        {% endif %}
+                        <li class="nav-item dropdown">
+                            <button class="btn btn-link nav-link py-2 px-0 px-lg-2 dropdown-toggle d-flex show" id="bd-theme" type="button" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme (dark)">
+                                <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor" class="bi theme-icon-active"><use href="{{ asset('build/images/bootstrap-icons.svg') }}#moon-stars-fill"></use></svg>
+                                <span class="d-lg-none ms-2" id="bd-theme-text">Changer de thème</span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="bd-theme-text" data-bs-popper="static">
+                                <li>
+                                    <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+                                        <svg class="bi me-2 opacity-50 theme-icon" fill="currentColor" viewBox="0 0 16 16" width="16" height="16"><use href="{{ asset('build/images/bootstrap-icons.svg') }}#sun-fill"></use></svg>
+                                        Clair
+                                        <svg class="bi ms-auto d-none" fill="currentColor" viewBox="0 0 16 16" width="16" height="16"><use href="{{ asset('build/images/bootstrap-icons.svg') }}#check2"></use></svg>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="dark" aria-pressed="false">
+                                        <svg class="bi me-2 opacity-50 theme-icon" fill="currentColor" viewBox="0 0 16 16" width="16" height="16"><use href="{{ asset('build/images/bootstrap-icons.svg') }}#moon-stars-fill"></use></svg>
+                                        Sombre
+                                        <svg class="bi ms-auto d-none" fill="currentColor" viewBox="0 0 16 16" width="16" height="16"><use href="{{ asset('build/images/bootstrap-icons.svg') }}#check2"></use></svg>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto" aria-pressed="false">
+                                        <svg class="bi me-2 opacity-50 theme-icon" fill="currentColor" viewBox="0 0 16 16" width="16" height="16"><use href="{{ asset('build/images/bootstrap-icons.svg') }}#circle-half"></use></svg>
+                                        Auto
+                                        <svg class="bi ms-auto d-none" fill="currentColor" viewBox="0 0 16 16" width="16" height="16"><use href="{{ asset('build/images/bootstrap-icons.svg') }}#check2"></use></svg>
+                                    </button>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <form class="d-flex align-items-start align-self-start" role="search" action="{{ url('app_advertisement') }}" method="get">
+                        <input class="form-control me-2" type="search" name="search" placeholder="{{ search | default('Chercher...') }}" aria-label="Search">
+                            <button class="btn btn-outline-success" name="searching" type="submit">
+                                <i class="bi-search">
+                                </i>
+                            </button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+        {% for flash_error in app.flashes('error') %}
+            <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+        {% endfor %}
+        {% for flash_success in app.flashes('success') %}
+            <div class="alert alert-success" role="alert">{{ flash_success }}</div>
+        {% endfor %}
+        {% block body %}{% endblock %}
+    </body>
+</html>

@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ advertisement_show.title }}{% endblock %}
+
+{% block body %}
+
+    <h1>{{ advertisement_show.title }}</h1>
+    <a href="{{ path('app_user_advertisements', {'user': owner.id}) }}"><h3><span class="badge owner-badge">{{ owner.firstname }}</span></h3></a>
+    <dt>Description:</dt>
+        <dd>{{ advertisement_show.description }}</dd>
+
+    <dt>Price :</dt>
+        <dd>{{ advertisement_show.price }}</dd>
+
+    <dt>Location :</dt>
+        <dd>{{ advertisement_show.location }}</dd>
+
+    <dt>Category :</dt>
+        <dd>{{ advertisement_show.category.name }}</dd>
+
+    <dt>Created :</dt>
+        <dd>{{ advertisement_show.createdAt.format("Y/m/d H:i:s") }}</dd>
+
+    {% if advertisement_show.updateAt != null %}
+    <dt>Updated :</dt>
+        <dd>{{ advertisement_show.updateAt.format("Y/m/d H:i:s") }}</dd>
+    {% endif %}
+
+    <a href={{ path('app_advertisement') }}>Back to list</a>
+
+    {% if is_granted('POST_EDIT', advertisement_show) %}
+        <a href={{ path('app_advertisement_edit', {'advertisement': advertisement_show.id}) }}>Edit</a>
+    {% endif %}
+
+    {% if is_granted('POST_DELETE', advertisement_show) %}
+        {{ include('advertisement/_delete.html.twig', {'advertisement': advertisement_show.id}) }}
+    {% endif %}
+
+{% endblock %}

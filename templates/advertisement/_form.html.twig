@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+    <button type="submit" class="btn btn-primary">Submit</button>
+    {{ form_end(form) }}
+
+    {% if advertisement.id == null %}
+        <a href="{{ path('app_advertisement') }}">Back to list</a>
+    {% else %}
+        <a href="{{ path('app_advertisement_show', {'advertisement': advertisement.id}) }}">Back to advertissement</a>
+    {% endif %}
+{% endblock %}

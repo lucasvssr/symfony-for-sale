@@ -1,0 +1,19 @@
+<div class="card mb-3 bg-subtle">
+    <div class="card-body">
+        <h5 class="card-title ">{{ advertisement.title }}</h5>
+        <p class="card-text ">{{ advertisement.description }}</p>
+        <div class="d-flex justify-content-between align-items-center">
+            <a href="{{ path('app_category_show', {'category': advertisement.category.id}) }}">
+                <span class="badge text-bg-warning ">{{ advertisement.category.name }}</span>
+            </a>
+            <div class="d-flex w-auto">
+
+                {{ component('AdvertisementLikes', {'advertisement': advertisement, 'currentUser': currentUser} ) }}
+                {% if is_granted('POST_DELETE', advertisement) %}
+                    {{ include('advertisement/_delete.html.twig', {'advertisement': advertisement.id}) }}
+                {% endif %}
+                <a href="{{ path('app_advertisement_show', {'advertisement': advertisement.id}) }}" class="btn btn-primary">Voir l'annonce</a>
+            </div>
+        </div>
+    </div>
+</div>

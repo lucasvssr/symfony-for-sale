@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ category_show.name }}{% endblock %}
+
+{% block body %}
+    <style>
+        .example-wrapper {
+            margin: 1em auto;
+            max-width: 800px;
+            width: 95%;
+            font: 18px / 1.5 sans-serif;
+        }
+    </style>
+
+    <div class="example-wrapper">
+        <h1>{{ category_show.name }}</h1>
+
+        {% for advertisement in advertisements %}
+            {{ include('_adverstisement.html.twig', {'advertisement': advertisement}) }}
+        {% else %}
+            <p>Pas d'annonce</p>
+        {% endfor %}
+    </div>
+{% endblock %}
